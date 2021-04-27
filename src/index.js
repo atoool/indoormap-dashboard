@@ -17,9 +17,6 @@
 */
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-
-import AdminLayout from "layouts/Admin/Admin.js";
 
 import "assets/scss/black-dashboard-react.scss";
 import "assets/demo/demo.css";
@@ -29,14 +26,15 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper";
 import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper";
 
+import { LoginContextProvider } from "contexts/LoginContext";
+import Router from "Router";
+
 ReactDOM.render(
   <ThemeContextWrapper>
     <BackgroundColorWrapper>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" render={(props) => <AdminLayout {...props} />} />
-        </Switch>
-      </BrowserRouter>
+      <LoginContextProvider>
+        <Router />
+      </LoginContextProvider>
     </BackgroundColorWrapper>
   </ThemeContextWrapper>,
   document.getElementById("root")

@@ -16,6 +16,7 @@
 
 */
 import Dashboard from "views/Dashboard.js";
+import UserProfile from "views/UserProfile";
 
 var routes = [
   {

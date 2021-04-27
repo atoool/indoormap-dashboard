@@ -38,6 +38,7 @@ import {
   NavbarToggler,
   ModalHeader,
 } from "reactstrap";
+import { admin } from "utils/firebase-admin";
 
 function AdminNavbar(props) {
   const [collapseOpen, setcollapseOpen] = React.useState(false);
@@ -126,7 +127,12 @@ function AdminNavbar(props) {
                     <DropdownItem className="nav-item">Profile</DropdownItem>
                   </NavLink>
                   <DropdownItem divider tag="li" />
-                  <NavLink tag="li">
+                  <NavLink
+                    tag="li"
+                    onClick={() => {
+                      admin.auth().signOut();
+                    }}
+                  >
                     <DropdownItem className="nav-item">Log out</DropdownItem>
                   </NavLink>
                 </DropdownMenu>

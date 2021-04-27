@@ -2,6 +2,7 @@ import React from "react";
 import QRCode from "qrcode.react";
 import { Card, CardHeader, CardBody, CardTitle, Row, Col } from "reactstrap";
 import useFirestore from "hooks/useFirestore";
+import Admin from "layouts/Admin/Admin";
 
 function Dashboard(props) {
   const [data, setData] = React.useState([]);
@@ -13,7 +14,7 @@ function Dashboard(props) {
   useFirestore({ update });
 
   return (
-    <>
+    <Admin>
       <div className="content">
         <Row>
           {data.map((itm) => (
@@ -37,7 +38,7 @@ function Dashboard(props) {
           ))}
         </Row>
       </div>
-    </>
+    </Admin>
   );
 }
 

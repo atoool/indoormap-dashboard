@@ -15,153 +15,43 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { LoginContext } from "contexts/LoginContext";
+import useSignIn from "hooks/useSignIn";
+import Admin from "layouts/Admin/Admin";
 import React from "react";
 
 // reactstrap components
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   CardText,
   FormGroup,
-  Form,
   Input,
   Row,
   Col,
 } from "reactstrap";
 
 function UserProfile() {
+  const [user, setUser] = React.useState({ email: "", pass: "" });
+
+  const onLogin = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useSignIn({ email: user.email, pass: user.pass });
+  };
+
+  const onChange = (e, type) => {
+    const temp = user;
+    temp[type] = e.target.value;
+    setUser({ ...temp });
+  };
+
   return (
-    <>
+    <Admin login={true}>
       <div className="content">
         <Row>
-          <Col md="8">
-            <Card>
-              <CardHeader>
-                <h5 className="title">Edit Profile</h5>
-              </CardHeader>
-              <CardBody>
-                <Form>
-                  <Row>
-                    <Col className="pr-md-1" md="5">
-                      <FormGroup>
-                        <label>Company (disabled)</label>
-                        <Input
-                          defaultValue="Creative Code Inc."
-                          disabled
-                          placeholder="Company"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-md-1" md="3">
-                      <FormGroup>
-                        <label>Username</label>
-                        <Input
-                          defaultValue="michael23"
-                          placeholder="Username"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-md-1" md="4">
-                      <FormGroup>
-                        <label htmlFor="exampleInputEmail1">
-                          Email address
-                        </label>
-                        <Input placeholder="mike@email.com" type="email" />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-md-1" md="6">
-                      <FormGroup>
-                        <label>First Name</label>
-                        <Input
-                          defaultValue="Mike"
-                          placeholder="Company"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-md-1" md="6">
-                      <FormGroup>
-                        <label>Last Name</label>
-                        <Input
-                          defaultValue="Andrew"
-                          placeholder="Last Name"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="12">
-                      <FormGroup>
-                        <label>Address</label>
-                        <Input
-                          defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                          placeholder="Home Address"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-md-1" md="4">
-                      <FormGroup>
-                        <label>City</label>
-                        <Input
-                          defaultValue="Mike"
-                          placeholder="City"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-md-1" md="4">
-                      <FormGroup>
-                        <label>Country</label>
-                        <Input
-                          defaultValue="Andrew"
-                          placeholder="Country"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-md-1" md="4">
-                      <FormGroup>
-                        <label>Postal Code</label>
-                        <Input placeholder="ZIP Code" type="number" />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="8">
-                      <FormGroup>
-                        <label>About Me</label>
-                        <Input
-                          cols="80"
-                          defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                            that two seat Lambo."
-                          placeholder="Here can be your description"
-                          rows="4"
-                          type="textarea"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                </Form>
-              </CardBody>
-              <CardFooter>
-                <Button className="btn-fill" color="primary" type="submit">
-                  Save
-                </Button>
-              </CardFooter>
-            </Card>
-          </Col>
-          <Col md="4">
+          <Col md="10">
             <Card className="card-user">
               <CardBody>
                 <CardText />
@@ -176,26 +66,59 @@ function UserProfile() {
                       className="avatar"
                       src={require("assets/img/emilyz.jpg").default}
                     />
-                    <h5 className="title">Mike Andrew</h5>
                   </a>
-                  <p className="description">Ceo/Co-Founder</p>
                 </div>
-                <div className="card-description">
-                  Do not be scared of the truth because we need to restart the
-                  human foundation in truth And I love you like Kanye loves
-                  Kanye I love Rick Owens’ bed design but the back is...
+                <div
+                  style={{
+                    width: "100%",
+                    marginBottom: 20,
+                    marginTop: 20,
+                  }}
+                >
+                  <h6
+                    className="title"
+                    style={{ fontSize: 20, textAlign: "center" }}
+                  >
+                    LOGIN
+                  </h6>
                 </div>
+                <Col className="pl-md-1" md="12">
+                  <FormGroup>
+                    <label htmlFor="exampleInputEmail1">Email address</label>
+                    <Input
+                      placeholder="mike@email.com"
+                      type="email"
+                      onChange={(e) => onChange(e, "email")}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col className="pl-md-1" md="12">
+                  <FormGroup>
+                    <label>Password</label>
+                    <Input
+                      type="password"
+                      placeholder="Enter password"
+                      onChange={(e) => onChange(e, "pass")}
+                    />
+                  </FormGroup>
+                </Col>
               </CardBody>
               <CardFooter>
-                <div className="button-container">
-                  <Button className="btn-icon btn-round" color="facebook">
-                    <i className="fab fa-facebook" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="twitter">
-                    <i className="fab fa-twitter" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="google">
-                    <i className="fab fa-google-plus" />
+                <div
+                  style={{
+                    width: "100%",
+                    justifyContent: "center",
+                    flex: 1,
+                    display: "flex",
+                  }}
+                >
+                  <Button
+                    className="btn-fill"
+                    color="primary"
+                    type="submit"
+                    onClick={onLogin}
+                  >
+                    Sign In
                   </Button>
                 </div>
               </CardFooter>
@@ -203,7 +126,7 @@ function UserProfile() {
           </Col>
         </Row>
       </div>
-    </>
+    </Admin>
   );
 }
 
