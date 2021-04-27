@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "production": "my-new-react-app"
+  },
+  "targets": {
+    "my-new-react-app": {
+      "hosting": {
+        "indoormap": [
+          "indoormap"
+        ]
+      }
+    }
+  }
+}
