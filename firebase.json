@@ -3,8 +3,17 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  "hosting": {
+  "hosting": [{
     "target":"indoormap",
+    "public": "website",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  {
+    "target":"dashboard-indoor",
     "public": "build",
     "ignore": [
       "firebase.json",
@@ -12,4 +21,5 @@
       "**/node_modules/**"
     ]
   }
+]
 }
